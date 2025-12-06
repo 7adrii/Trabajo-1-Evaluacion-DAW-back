@@ -49,6 +49,10 @@ const modifyCar = (async (id, modelo, marca, potencia, precio, fechaSalida, tran
     });
 });
 
+const removeCar = (async (id) => {
+    await db('cars').where({id: id}).del();
+});
+
 module.exports = {
     findAllCars,
     findCarById,
@@ -56,5 +60,6 @@ module.exports = {
     carExistById,
     carExistByModelo,
     addCar,
-    modifyCar
+    modifyCar,
+    removeCar
 };
