@@ -1,4 +1,4 @@
-const {findAllCars, findCarById, findCarByName, carExistById, carExistByName} = require('../service/cars');
+const {findAllCars, findCarById, findCarByModelo, carExistById, carExistByModelo} = require('../service/cars');
 
 const getCars = (async (req, res) => {
     const cars =  await findAllCars();
@@ -20,22 +20,44 @@ const getCarById = (async (req, res) => {
     res.status(200).json(carId);
 });
 
-const getCarByName = (async (req, res) => {
-    const name = req.params.name;
+const getCarByModelo = (async (req, res) => {
+    const modelo = req.params.modelo;
 
-    if (!await carExistByName(name)) {
+    if (!await carExistByModelo(modelo)) {
         return res.status(404).json({
             code: 404,
             title: 'Not-Found',
-            message: `El coche con nombre ${name} no existe`
+            message: `El coche con nombre ${modelo} no existe`
         });
     }
 
-    const carName = await findCarByName(name);
+    const carModelo = await findCarByModelo(modelo);
+});
+
+const postCar = (async (req, res) => {
+    const modelo = req.body.modelo;
+    if (await carExistByModelo(modelo)) {
+        return res.status(409).json({
+            code: 409,
+            title: 'Conflict',
+            message: `El coche con nombre ${modelo} ya existe`
+        })
+    }
+    const marca = req.body.marca;
+    const potencia = req.body.potencia;
+    const precio = req.body.precio;
+    const fechaSalida = req.body.fechaSalida;
+    const transmision = req.body.transmision;
+    const url = req.body.url;
+
+    const newCar = await addCar(modelo, marca, potencia, precio, fechaSalida, transmision, url);
+
+    return res.status(201).json(newCar);
 });
 
 module.exports = {
     getCars,
     getCarById,
-    getCarByName
+    getCarByModelo,
+    postCar
 };
