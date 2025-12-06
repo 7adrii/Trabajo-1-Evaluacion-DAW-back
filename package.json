@@ -1,5 +1,16 @@
 {
+  "name": "back",
+  "version": "0.1",
+  "description": "Es una api de un foro de coches de lujo donde se almacenan los modelos",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.11",
+    "sqlite3": "^5.1.7"
   }
 }
