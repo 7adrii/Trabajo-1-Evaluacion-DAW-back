@@ -37,6 +37,18 @@ const addCar = (async (modelo, marca, potencia, precio, fechaSalida, transmision
     });
 });
 
+const modifyCar = (async (id, modelo, marca, potencia, precio, fechaSalida, transmision, url) => {
+    return await db('cars').where({id: id}).update({
+        modelo: modelo,
+        marca: marca,
+        potencia: potencia,
+        precio: precio,
+        fechaSalida: fechaSalida,
+        transmision: transmision,
+        url: url
+    });
+});
+
 module.exports = {
     findAllCars,
     findCarById,
@@ -44,4 +56,5 @@ module.exports = {
     carExistById,
     carExistByModelo,
     addCar,
+    modifyCar
 };

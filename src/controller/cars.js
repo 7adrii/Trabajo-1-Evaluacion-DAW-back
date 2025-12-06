@@ -55,9 +55,32 @@ const postCar = (async (req, res) => {
     return res.status(201).json(newCar);
 });
 
+const putCar = (async (req, res) => {
+    const id = req.params.id;
+    if (!await carExistById(id)) {
+        return res.status(404).json({
+            code: 404,
+            title: 'Not-Found',
+            message: `El coche con id ${id} no existe`
+        });
+    }
+    const modelo = req.body.modelo;
+    const marca = req.body.marca;
+    const potencia = req.body.potencia;
+    const precio = req.body.precio;
+    const fechaSalida = req.body.fechaSalida;
+    const transmision = req.body.transmision;
+    const url = req.body.url;
+
+    await modifyCar(id, modelo, marca, potencia, precio, fechaSalida, transmision, url);
+
+    return res.status(200).end();
+});
+
 module.exports = {
     getCars,
     getCarById,
     getCarByModelo,
-    postCar
+    postCar,
+    putCar
 };
