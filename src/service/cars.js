@@ -8,8 +8,8 @@ const findCarById = (async (id) => {
     return await db('cars').select('*').where({id: id}).first();
 });
 
-const findCarByName = (async (name) => {
-    return await db('cars').select('*').where({name: name}).first();
+const findCarByModelo = (async (modelo) => {
+    return await db('cars').select('*').where({modelo: modelo}).first();
 });
 
 const carExistById = (async (id) => {
@@ -17,19 +17,31 @@ const carExistById = (async (id) => {
     return car != null;
 });
 
-const carExistByName = (async (name) => {
-    const car =  await db('cars').select('*').where({name: name}).first();
-    if(city === undefined){
+const carExistByModelo = (async (modelo) => {
+    const car =  await db('cars').select('*').where({modelo: modelo}).first();
+    if(car === undefined){
         return false;
     }
     return true;
 });
 
+const addCar = (async (modelo, marca, potencia, precio, fechaSalida, transmision, url) => {
+    return await db('cars').insert({
+        modelo: modelo,
+        marca: marca,
+        potencia: potencia,
+        precio: precio,
+        fechaSalida: fechaSalida,
+        transmision: transmision,
+        url: url
+    });
+});
 
 module.exports = {
     findAllCars,
     findCarById,
-    findCarByName,
+    findCarByModelo,
     carExistById,
-    carExistByName
+    carExistByModelo,
+    addCar,
 };
