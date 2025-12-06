@@ -1,4 +1,4 @@
-const {findAllCars, findCarById, findCarByModelo, carExistById, carExistByModelo} = require('../service/cars');
+const {findAllCars, findCarById, findCarByModelo, carExistById, carExistByModelo, addCar, modifyCar, removeCar} = require('../service/cars');
 
 const getCars = (async (req, res) => {
     const cars =  await findAllCars();
@@ -32,6 +32,7 @@ const getCarByModelo = (async (req, res) => {
     }
 
     const carModelo = await findCarByModelo(modelo);
+    res.status(200).json(carModelo);
 });
 
 const postCar = (async (req, res) => {
@@ -77,10 +78,24 @@ const putCar = (async (req, res) => {
     return res.status(200).end();
 });
 
+const delCar = (async (req, res) => {
+    const id = req.params.id;
+    if (!await carExistById(id)) {
+        return res.status(404).json({
+            code: 404,
+            title: 'Not-Found',
+            message: `El coche con id ${id} no existe`
+        });
+    }
+    await removeCar(id);
+    res.status(204).end();
+});
+
 module.exports = {
     getCars,
     getCarById,
     getCarByModelo,
     postCar,
-    putCar
+    putCar,
+    delCar
 };
