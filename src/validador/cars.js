@@ -42,29 +42,29 @@ const validateCreateCar = [
 
 const validateUpdateCar = [
     param('id')
-        .notEmpty().withMessage('Id obligatorio')
+        .optional()
         .isInt().withMessage('Id debe ser un número entero mayor que 0'),
     body('modelo')
-        .notEmpty().withMessage('Modelo obligatorio')
+        .optional()
         .isString().withMessage('El modelo debe ser una cadena de texto')
         .isLength({min: 1, max: 255}).withMessage('El modelo debe tener entre 1 y 255 caracteres'),
     body('marca')
-        .notEmpty().withMessage('Marca obligatoria')
+        .optional()
         .isString().withMessage('La marca debe ser una cadena de texto'),
     body('potencia')
-        .notEmpty().withMessage('Potencia obligatoria')
+        .optional()
         .isInt({min: 1}).withMessage('La potencia debe ser un número entero mayor que 0'),
     body('precio')
-        .notEmpty().withMessage('Precio obligatorio')
+        .optional()
         .isFloat({min: 1}).withMessage('El precio debe ser un número positivo'),
     body('fechaSalida')
-        .notEmpty().withMessage('Fecha de salida obligatoria')
+        .optional()
         .isDate().withMessage('La fecha de salida debe ser una fecha válida'),
     body('transmision')
-        .notEmpty().withMessage('Transmisión obligatoria')
+        .optional()
         .isBoolean().withMessage('La transmisión debe ser un valor booleano'),
     body('url')
-        .notEmpty().withMessage('URL obligatoria')
+        .optional()
         .isURL().withMessage('La URL debe ser una URL válida'),
 ];
 
