@@ -2,7 +2,13 @@ const {findAllCars, findCarById, findCarByModelo, carExistById, carExistByModelo
 
 const getCars = (async (req, res) => {
     const cars =  await findAllCars();
-    res.status(200).json(cars);
+    res.status(200).json({
+        code: 200,
+        title: 'success',
+        message: 'Operación realizada con éxito',
+        count: cars.length,
+        data: cars
+    });
 });
 
 const getCarById = (async (req, res) => {
@@ -17,7 +23,12 @@ const getCarById = (async (req, res) => {
     }
 
     const carId = await findCarById(id);
-    res.status(200).json(carId);
+    res.status(200).json({
+        code: 200,
+        title: 'success',
+        message: `Coche con id ${id} obtenido con éxito`,
+        data: carId
+    });
 });
 
 const getCarByModelo = (async (req, res) => {
@@ -32,7 +43,12 @@ const getCarByModelo = (async (req, res) => {
     }
 
     const carModelo = await findCarByModelo(modelo);
-    res.status(200).json(carModelo);
+    res.status(200).json({
+        code: 200,
+        title: 'success',
+        message: `Coche con modelo ${modelo} obtenido con éxito`,
+        data: carModelo
+    });
 });
 
 const postCar = (async (req, res) => {
@@ -53,7 +69,21 @@ const postCar = (async (req, res) => {
 
     const newCar = await addCar(modelo, marca, potencia, precio, fechaSalida, transmision, url);
 
-    return res.status(201).json(newCar);
+    return res.status(201).json({
+        code: 201,
+        title: 'Created',
+        message: `El coche ${modelo} se ha creado con éxito`,
+        data: {
+            id: newCar.id,
+            modelo,
+            marca,
+            potencia,
+            precio,
+            fechaSalida,
+            transmision,
+            url
+        }
+    });
 });
 
 const putCar = (async (req, res) => {
@@ -75,7 +105,11 @@ const putCar = (async (req, res) => {
 
     await modifyCar(id, modelo, marca, potencia, precio, fechaSalida, transmision, url);
 
-    return res.status(200).end();
+    return res.status(200).json({
+        code: 200,
+        title: 'updated',
+        message: `El coche con id ${id} se ha modificado con éxito`,
+    });
 });
 
 const delCar = (async (req, res) => {
@@ -88,7 +122,11 @@ const delCar = (async (req, res) => {
         });
     }
     await removeCar(id);
-    res.status(204).end();
+    res.status(200).json({
+        code: 200,
+        title: 'deleted',
+        message: `El coche con id ${id} se ha eliminado con éxito`
+    });
 });
 
 module.exports = {
