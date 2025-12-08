@@ -1,6 +1,6 @@
 # Cars Luxury Forum API
 
-API REST para un foro de coches de lujo donde se almacenan y gestionan modelos de vehículos premium.
+Esta API esta hecha para un foro de coches de lujo donde se almacenan y gestionan modelos de vehículos premium.
 
 ## Índice
 
