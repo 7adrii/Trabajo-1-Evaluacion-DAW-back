@@ -25,7 +25,7 @@ const carExistByModelo = (async (modelo) => {
     return true;
 });
 
-const addCar = (async (modelo, marca, potencia, precio, fechaSalida, transmision, url) => {
+const addCar = (async (modelo, marca, potencia, precio, fechaSalida, transmision, url, color) => {
     return await db('cars').insert({
         modelo: modelo,
         marca: marca,
@@ -33,11 +33,12 @@ const addCar = (async (modelo, marca, potencia, precio, fechaSalida, transmision
         precio: precio,
         fechaSalida: fechaSalida,
         transmision: transmision,
-        url: url
+        url: url,
+        color: color
     });
 });
 
-const modifyCar = (async (id, modelo, marca, potencia, precio, fechaSalida, transmision, url) => {
+const modifyCar = (async (id, modelo, marca, potencia, precio, fechaSalida, transmision, url, color) => {
     return await db('cars').where({id: id}).update({
         modelo: modelo,
         marca: marca,
@@ -45,7 +46,8 @@ const modifyCar = (async (id, modelo, marca, potencia, precio, fechaSalida, tran
         precio: precio,
         fechaSalida: fechaSalida,
         transmision: transmision,
-        url: url
+        url: url,
+        color: color
     });
 });
 

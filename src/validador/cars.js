@@ -38,6 +38,9 @@ const validateCreateCar = [
     body('url')
         .notEmpty().withMessage('URL obligatoria')
         .isURL().withMessage('La URL debe ser una URL válida'),
+    body('color')
+        .notEmpty().withMessage().apply('Color del coche obligatorio')
+        .isString().withMessage('El color tiene que ser una cadena de texto valida')
 ];
 
 const validateUpdateCar = [

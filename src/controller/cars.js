@@ -66,8 +66,9 @@ const postCar = (async (req, res) => {
     const fechaSalida = req.body.fechaSalida;
     const transmision = req.body.transmision;
     const url = req.body.url;
+    const color = req.body.color;
 
-    const newCar = await addCar(modelo, marca, potencia, precio, fechaSalida, transmision, url);
+    const newCar = await addCar(modelo, marca, potencia, precio, fechaSalida, transmision, url, color);
 
     return res.status(201).json({
         code: 201,
@@ -81,7 +82,8 @@ const postCar = (async (req, res) => {
             precio,
             fechaSalida,
             transmision,
-            url
+            url,
+            color
         }
     });
 });
@@ -102,8 +104,9 @@ const putCar = (async (req, res) => {
     const fechaSalida = req.body.fechaSalida;
     const transmision = req.body.transmision;
     const url = req.body.url;
+    const color = req.body.color;
 
-    await modifyCar(id, modelo, marca, potencia, precio, fechaSalida, transmision, url);
+    await modifyCar(id, modelo, marca, potencia, precio, fechaSalida, transmision, url, color);
 
     return res.status(200).json({
         code: 200,
